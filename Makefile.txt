@@ -1,0 +1,22 @@
+CXX = g++
+CXXFLAGS = -Wall -g
+
+all: myShell
+
+myShell: myShell.o Command.o Process.o wrappedFuncs.o
+	$(CXX) $(CXXFLAGS) myShell.o Command.o Process.o wrappedFuncs.o -o myShell
+
+myShell.o: myShell.cpp Command.hpp Process.hpp wrappedFuncs.hpp
+	$(CXX) $(CXXFLAGS) -c myShell.cpp
+
+Command.o: Command.cpp Command.hpp
+	$(CXX) $(CXXFLAGS) -c Command.cpp
+
+Process.o: Process.cpp Process.hpp wrappedFuncs.hpp
+	$(CXX) $(CXXFLAGS) -c Process.cpp
+
+wrappedFuncs.o: wrappedFuncs.cpp wrappedFuncs.hpp
+	$(CXX) $(CXXFLAGS) -c wrappedFuncs.cpp
+
+clean: 
+	rm -f *.o myShell 
